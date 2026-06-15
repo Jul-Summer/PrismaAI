@@ -9,12 +9,16 @@ import androidx.lifecycle.AndroidViewModel
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val model = TFLiteModel(application)
+    private val model = TFLiteModel(application, "G_A2B.tflite")
+    private val style = StyleTransfer(model)
 
     var resultBitmap by mutableStateOf<Bitmap?>(null)
         private set
 
-    fun runStyleTransfer(input: Bitmap) {
-        resultBitmap = StyleTransfer(model.interpreter).run(input)
+    fun runStyleTransfer() {
+
+        val input = Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)
+
+        resultBitmap = style.run(input)
     }
 }

@@ -9,10 +9,12 @@ class MainViewModelFactory(
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
+
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(app) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+
+        throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
     }
 }
 

@@ -22,7 +22,7 @@ fun StyleTransferScreen(viewModel: MainViewModel) {
         viewModel.resultBitmap?.let { bitmap: Bitmap ->
             Image(
                 bitmap = bitmap.asImageBitmap(),
-                contentDescription = "Result Image"
+                contentDescription = "Result"
             )
         }
     }

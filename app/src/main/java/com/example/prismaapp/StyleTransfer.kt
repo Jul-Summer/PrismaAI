@@ -1,30 +1,13 @@
-import android.content.Context
-import org.tensorflow.lite.Interpreter
-import java.io.FileInputStream
-import java.nio.channels.FileChannel
+package com.example.prismaapp
 
-class StyleTransfer(private val context: Context) {
+import android.graphics.Bitmap
+import android.graphics.Color
 
-    private val interpreter: Interpreter
+class StyleTransfer(private val model: TFLiteModel) {
 
-    init {
-        val fileDescriptor = context.assets.openFd("G_A2B.tflite")
+    fun run(input: Bitmap): Bitmap {
 
-        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
-        val channel = inputStream.channel
-
-        val model = channel.map(
-            FileChannel.MapMode.READ_ONLY,
-            fileDescriptor.startOffset,
-            fileDescriptor.declaredLength
-        )
-
-        interpreter = Interpreter(model)
-    }
-
-    fun run(
-        input: Array<Array<Array<FloatArray>>>
-    ): Array<Array<Array<FloatArray>>> {
+        val tensor = ImageUtils.bitmapToByteBuffer(input)
 
         val output = Array(1) {
             Array(256) {
@@ -34,9 +17,28 @@ class StyleTransfer(private val context: Context) {
             }
         }
 
-        interpreter.run(input, output)
+        model.interpreter.run(tensor, output)
 
-        return output
+        return convertToBitmap(output)
+    }
+
+    private fun convertToBitmap(
+        output: Array<Array<Array<FloatArray>>>
+    ): Bitmap {
+
+        val bmp = Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)
+
+        for (y in 0 until 256) {
+            for (x in 0 until 256) {
+
+                val r = (output[0][y][x][0] * 255).toInt().coerceIn(0, 255)
+                val g = (output[0][y][x][1] * 255).toInt().coerceIn(0, 255)
+                val b = (output[0][y][x][2] * 255).toInt().coerceIn(0, 255)
+
+                bmp.setPixel(x, y, Color.rgb(r, g, b))
+            }
+        }
+
+        return bmp
     }
 }
-
