@@ -1,15 +1,16 @@
 #  PrismaAI
 
----------------------------------------------------
-|                                                 |
-|               PrismaAI                          |
-|   Neural Style Transfer powered by TFLite      |
-|                                                 |
-|     ✨ glow particles / gradient light          |
-|                                                 |
-|   CycleGAN • Android • On-device AI            |
-|                                                 |
----------------------------------------------------
+-# PrismaAI
+
+<p align="center">
+  <img src="screenshots/banner.png" width="900"/>
+</p>
+
+## ✨ Transform photos into art using AI
+
+<p align="center">
+  <img src="screenshots/demo.gif" width="700"/>
+</p>
 
 ##  AI Style Transfer for Android
 
