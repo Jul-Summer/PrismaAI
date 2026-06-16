@@ -1,75 +1,107 @@
-#  PrismaAI
+#  PrismaAI — AI Style Transfer for Android
 
-##  AI Style Transfer for Android (TensorFlow Lite)
+![Android](https://img.shields.io/badge/Platform-Android-green)
+![TensorFlow Lite](https://img.shields.io/badge/ML-TensorFlow%20Lite-orange)
+![Kotlin](https://img.shields.io/badge/Code-Kotlin-blue)
+![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
+![Model](https://img.shields.io/badge/Model-CycleGAN-purple)
 
-PrismaAI — это мобильное AI-приложение, которое выполняет нейронный перенос стиля в реальном времени прямо на устройстве с использованием обученного генератора CycleGAN, конвертированного в TensorFlow Lite.
+---
 
-Проект реализует полный ML-пайплайн, оптимизированный для мобильного инференса.
+##  Overview
 
-##  Core Features
+**PrismaAI** — мобильное AI-приложение для **нейронного переноса стиля (Neural Style Transfer)**, работающее полностью **на устройстве (offline)** с использованием TensorFlow Lite.
+
+Модель основана на **CycleGAN Generator (G_A2B)** и оптимизирована для мобильного инференса.
+
+---
+
+##  Key Features
 
 -  Neural Style Transfer (CycleGAN)
--  Gallery image input
--  On-device inference (TensorFlow Lite)
--  Jetpack Compose UI
--  Fully offline AI processing
+-  Fully offline inference (no cloud)
+-  Fast TensorFlow Lite execution
+-  On-device AI processing
+-  Gallery image support
+-  MVVM Architecture
 
 ##  AI Pipeline
 
-Image → Resize → Normalize → TFLite Model (G_A2B) → Output Tensor → Bitmap → UI Rendering
 
-##  Performance Metrics
+Image
+  → Resize (256×256)
+  → Normalize
+  → TensorFlow Lite Model (G_A2B)
+  → Output Tensor
+  → Bitmap
+  → UI Rendering (Jetpack Compose)
 
-###  Inference Latency
-- CPU (emulator / mid device): ~120–250 ms per image
-- Optimized TFLite model: ~90–180 ms per image
+  
+| Metric            | Value           |
+| ----------------- | --------------- |
+| Inference Latency | 90–180 ms       |
+| Model Size        | 10–25 MB        |
+| Input Resolution  | 256 × 256       |
+| Output Resolution | 256 × 256       |
+| Runtime           | On-device (CPU) |
 
-###  Model Size
-- Original CycleGAN Generator: ~60–120 MB
-- TensorFlow Lite model (quantized/optimized): ~10–25 MB
-
-
-###  Memory Usage
-- Peak RAM usage: ~150–300 MB
-- Stable runtime memory: ~180 MB average
-
-
-###  Resolution
-- Input: 256 × 256 × 3
-- Output: 256 × 256 × 3
 
 ## Model Information
+-  Architecture: CycleGAN (Generator G_A2B)
+-  Framework: TensorFlow Lite
+-  Execution: Fully offline
+-  Precision: Float32
+-  Platform: Android
+-  APK Download
 
-- Architecture: CycleGAN (Generator G_A2B)
-- Framework: TensorFlow Lite
-- Execution: On-device (no cloud dependency)
-- Precision: Float32 (optionally optimizable to INT8)
+### Latest Release
 
-##  Validation Results
+⬇ Download PrismaAI APK
 
--  Обучение модели успешно завершено-
--  Экспорт в TensorFlow Lite выполнен успешно
--  Инференс протестирован через TFLite Interpreter
--  Подтверждена форма выходного тензора (1, 256, 256, 3)
--  Подтверждена стабильная интеграция в Android
- 
-##  System Status
+▶️ How to Run
+-  Option 1 — Install APK (Recommended)
+Download APK from Releases
+Open file on Android device
+Enable “Install from unknown sources”
+Launch PrismaAI
+-  Option 2 — Run from Source
+git clone https://github.com/Jul-Summer/PrismaAI.git
+cd PrismaApp
 
-**Production Ready**
+Open in Android Studio → Run ▶
 
-The model is fully optimized for mobile deployment and real-time inference.
+ Validation Results
 
-##  Technical Stack
+✔ Model training completed successfully
+✔ TensorFlow Lite export successful
+✔ Inference tested via Interpreter
+✔ Output tensor shape validated (1, 256, 256, 3)
+✔ Stable Android integration confirmed
 
-- Kotlin
-- Jetpack Compose
-- TensorFlow Lite
-- MVVM Architecture
-- CycleGAN (ML model)
+ Demo
 
-##  Author
+Add screenshots in /screenshots
+
+screenshots/
+├── input.png
+├── output.png
+├── demo.gif
+ System Status
+PROJECT STATUS: PRODUCTION READY
+
+✔ Training OK
+✔ Export OK
+✔ TFLite OK
+✔ Android READY
+
+ ### Tech Stack
+Kotlin
+Jetpack Compose
+TensorFlow Lite
+MVVM Architecture
+CycleGAN
+###  Author
+
 Guljan Samarbekova
 
-PrismaAI Project — 2026
-
-AI Mobile Vision System
+AI Mobile Vision Project — 2026
