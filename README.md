@@ -1,8 +1,6 @@
 #  PrismaAI
 
-<p align="center">
-  <img src="screenshots/banner.png" />
-</p>
+<img src="screenshots/banner.png" style="border-radius:20px"/>
 
 ---
 
