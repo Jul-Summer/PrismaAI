@@ -1,7 +1,8 @@
 #  PrismaAI
 
-<img src="screenshots/banner.png" style="border-radius:20px"/>
-
+<p align="center">
+  <img src="screenshots/banner.png" width="900"/>
+</p>
 ---
 
 ##  AI Style Transfer for Android
