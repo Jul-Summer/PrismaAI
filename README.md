@@ -72,4 +72,5 @@ Image → Resize → Normalize → TFLite Model → Output Tensor → Bitmap →
 
 ##  Author
 Guljan Samarbekova
-AI mobile vision project — 2026
+
+- AI mobile vision project — 2026
