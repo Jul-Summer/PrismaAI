@@ -56,7 +56,7 @@ Image
 
 ### Latest Release
 
-⬇ Download PrismaAI APK
+https://github.com/Jul-Summer/PrismaAI/releases/latest⬇ Download PrismaAI APK
 
 ▶️ How to Run
 -  Option 1 — Install APK (Recommended)
@@ -64,19 +64,20 @@ Download APK from Releases
 Open file on Android device
 Enable “Install from unknown sources”
 Launch PrismaAI
--  Option 2 — Run from Source
+
+##  Option 2 — Run from Source
 git clone https://github.com/Jul-Summer/PrismaAI.git
 cd PrismaApp
 
-Open in Android Studio → Run ▶
+Open in Android Studio → Run
 
- Validation Results
+ ## Validation Results
 
-✔ Model training completed successfully
-✔ TensorFlow Lite export successful
-✔ Inference tested via Interpreter
-✔ Output tensor shape validated (1, 256, 256, 3)
-✔ Stable Android integration confirmed
+- ✔ Model training completed successfully
+- ✔ TensorFlow Lite export successful
+- ✔ Inference tested via Interpreter
+- ✔ Output tensor shape validated (1, 256, 256, 3)
+- ✔ Stable Android integration confirmed
 
  Demo
 
@@ -86,7 +87,10 @@ screenshots/
 ├── input.png
 ├── output.png
 ├── demo.gif
- System Status
+
+
+## System Status
+
 PROJECT STATUS: PRODUCTION READY
 
 ✔ Training OK
@@ -100,6 +104,8 @@ Jetpack Compose
 TensorFlow Lite
 MVVM Architecture
 CycleGAN
+
+
 ###  Author
 
 Guljan Samarbekova
