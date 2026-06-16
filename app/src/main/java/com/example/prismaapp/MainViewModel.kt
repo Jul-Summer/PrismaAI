@@ -1,24 +1,33 @@
 package com.example.prismaapp
 
-import android.app.Application
 import android.graphics.Bitmap
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel : ViewModel() {
 
-    private val model = TFLiteModel(application, "G_A2B.tflite")
-    private val style = StyleTransfer(model)
+    private val _input = MutableStateFlow<Bitmap?>(null)
+    val input = _input.asStateFlow()
 
-    var resultBitmap by mutableStateOf<Bitmap?>(null)
-        private set
+    private val _output = MutableStateFlow<Bitmap?>(null)
+    val output = _output.asStateFlow()
 
-    fun runStyleTransfer() {
+    fun setInput(bitmap: Bitmap) {
+        _input.value = bitmap
+    }
 
-        val input = Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)
+    fun setOutput(bitmap: Bitmap) {
+        _output.value = bitmap
+    }
 
-        resultBitmap = style.run(input)
+    // ✅ ВАЖНО
+    fun runStyle(styleTransfer: StyleTransfer) {
+
+        val bitmap = _input.value ?: return
+
+        val result = styleTransfer.apply(bitmap)
+
+        _output.value = result
     }
 }

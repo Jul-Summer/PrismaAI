@@ -6,28 +6,44 @@ import java.nio.ByteOrder
 
 object ImageUtils {
 
-    fun bitmapToByteBuffer(bitmap: Bitmap, size: Int = 256): ByteBuffer {
+    fun preprocess(bitmap: Bitmap): ByteBuffer {
 
-        val resized = Bitmap.createScaledBitmap(bitmap, size, size, true)
+        val resized = Bitmap.createScaledBitmap(bitmap, 256, 256, true)
 
-        val buffer = ByteBuffer.allocateDirect(4 * size * size * 3)
-        buffer.order(ByteOrder.nativeOrder())
+        val input = ByteBuffer.allocateDirect(1 * 256 * 256 * 3 * 4)
+        input.order(ByteOrder.nativeOrder())
 
-        val pixels = IntArray(size * size)
-        resized.getPixels(pixels, 0, size, 0, 0, size, size)
+        val pixels = IntArray(256 * 256)
+        resized.getPixels(pixels, 0, 256, 0, 0, 256, 256)
 
         for (pixel in pixels) {
-            val r = (pixel shr 16 and 0xFF) / 255.0f
-            val g = (pixel shr 8 and 0xFF) / 255.0f
-            val b = (pixel and 0xFF) / 255.0f
+            val r = ((pixel shr 16) and 0xFF) / 255f
+            val g = ((pixel shr 8) and 0xFF) / 255f
+            val b = (pixel and 0xFF) / 255f
 
-            buffer.putFloat(r)
-            buffer.putFloat(g)
-            buffer.putFloat(b)
+            input.putFloat(r)
+            input.putFloat(g)
+            input.putFloat(b)
         }
 
-        buffer.rewind()
-        return buffer
+        input.rewind()
+        return input
+    }
+
+    fun postprocess(output: ByteBuffer): Bitmap {
+
+        output.rewind()
+
+        val pixels = IntArray(256 * 256)
+
+        for (i in pixels.indices) {
+            val r = (output.float * 255).toInt().coerceIn(0, 255)
+            val g = (output.float * 255).toInt().coerceIn(0, 255)
+            val b = (output.float * 255).toInt().coerceIn(0, 255)
+
+            pixels[i] = (0xFF shl 24) or (r shl 16) or (g shl 8) or b
+        }
+
+        return Bitmap.createBitmap(pixels, 256, 256, Bitmap.Config.ARGB_8888)
     }
 }
-

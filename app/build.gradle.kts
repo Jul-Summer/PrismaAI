@@ -35,7 +35,7 @@ android {
 
 dependencies {
 
-    // Compose BOM (ОБЯЗАТЕЛЬНО ОДИН)
+    // 🔥 COMPOSE (BOM)
     implementation(platform("androidx.compose:compose-bom:2024.06.00"))
 
     implementation("androidx.activity:activity-compose:1.9.0")
@@ -45,9 +45,15 @@ dependencies {
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 
-    // VIEWMODEL (ВАЖНО)
+    // 🔥 VIEWMODEL
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
 
-    // TFLite
+    // 🔥 TFLite
     implementation("org.tensorflow:tensorflow-lite:2.14.0")
+
+    // 🧪 TEST FIX (androidTest error)
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

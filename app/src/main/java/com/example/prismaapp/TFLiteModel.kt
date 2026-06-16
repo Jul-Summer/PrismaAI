@@ -1,36 +1,21 @@
 package com.example.prismaapp
 
-import android.content.Context
 import org.tensorflow.lite.Interpreter
-import java.io.FileInputStream
-import java.nio.MappedByteBuffer
-import java.nio.channels.FileChannel
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 
 class TFLiteModel(
-    private val context: Context,
-    private val modelName: String
+    private val interpreter: Interpreter
 ) {
 
-    val interpreter: Interpreter
+    fun run(input: ByteBuffer): ByteBuffer {
 
-    init {
-        interpreter = Interpreter(loadModelFile())
-    }
+        val output = ByteBuffer.allocateDirect(1 * 256 * 256 * 3 * 4)
+        output.order(ByteOrder.nativeOrder())
 
-    private fun loadModelFile(): MappedByteBuffer {
+        interpreter.run(input, output)
 
-        val fileDescriptor = context.assets.openFd(modelName)
-        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
-        val fileChannel = inputStream.channel
-
-        return fileChannel.map(
-            FileChannel.MapMode.READ_ONLY,
-            fileDescriptor.startOffset,
-            fileDescriptor.declaredLength
-        )
-    }
-
-    fun close() {
-        interpreter.close()
+        output.rewind()
+        return output
     }
 }
