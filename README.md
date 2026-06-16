@@ -1,36 +1,42 @@
 #  PrismaAI
 
--# PrismaAI
-
 <p align="center">
   <img src="screenshots/banner.png" width="900"/>
 </p>
 
-## ✨ Transform photos into art using AI
+<p align="center">
+  <b>Neural Style Transfer AI for Android (TensorFlow Lite)</b>
+</p>
+
+
+
+## Live Demo
 
 <p align="center">
   <img src="screenshots/demo.gif" width="700"/>
 </p>
 
-##  AI Style Transfer for Android
 
-PrismaAI is a **TensorFlow Lite-powered mobile AI app** that performs real-time neural style transfer directly on-device.
 
----
+##  About the Project
 
-##  Demo
+PrismaAI is a production-style Android application that performs **real-time neural style transfer** using a trained CycleGAN model converted to **TensorFlow Lite**.
 
-<p align="center">
-  <img src="screenshots/demo.gif" width="300"/>
-</p>
+The full AI pipeline runs **on-device**, without cloud processing.
 
+
+
+##  AI Pipeline
+
+Image → Preprocessing → CycleGAN (G_A2B) → TensorFlow Lite → Output Image → UI
 ---
 
 ##  Results
 
-| Input | Output |
-|------|--------|
-| ![](screenshots/input.png) | ![](screenshots/output.png) |
+<p align="center">
+  <img src="screenshots/input.png" width="350"/>
+  <img src="screenshots/output.png" width="350"/>
+</p>
 
 ---
 
@@ -38,25 +44,28 @@ PrismaAI is a **TensorFlow Lite-powered mobile AI app** that performs real-time 
 
 - TensorFlow Lite (G_A2B Generator)
 - CycleGAN Architecture
-- On-device inference (no cloud)
+- On-device inference
+- Optimized for mobile performance
 
 ---
 
-##  Pipeline
+##  Features
 
-Image → Resize → Normalize → TFLite Model → Output Tensor → Bitmap → UI
-
----
+- Neural Style Transfer
+- Gallery image picker
+- Fast TFLite inference
+- Android Jetpack Compose UI
+- Offline AI processing
 
 ##  Download App
 
 <p align="center">
-  <a href="app-release.apk">
-    <img src="https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android" />
+  <a href="https://github.com/Jul-Summer/PrismaAI/releases">
+    <img src="https://img.shields.io/badge/Download-APK-7C3AED?style=for-the-badge&logo=android" />
   </a>
 </p>
 
----
+
 
 ##  Tech Stack
 
@@ -65,18 +74,20 @@ Image → Resize → Normalize → TFLite Model → Output Tensor → Bitmap →
 - TensorFlow Lite
 - MVVM Architecture
 
----
 
-##  Future Roadmap
 
-- Multiple styles (Van Gogh, Anime, Oil)
-- GPU acceleration
-- Video style transfer
-- Cloud AI mode
+##  Roadmap
 
----
+-  Multiple styles (Van Gogh, Anime, Oil Painting)
+-  GPU acceleration (NNAPI)
+-  Video style transfer
+-  Cloud AI mode (optional)
+
+
 
 ##  Author
-Guljan Samarbekova
+Guljan Samarbekova 
 
-- AI mobile vision project — 2026
+**PrismaAI Project — 2026**
+
+AI Mobile Vision System
