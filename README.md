@@ -1,57 +1,131 @@
-#  PrismaAI
+# PrismaAI — CycleGAN Mobile Style Transfer (Android + TFLite)
 
-AI Style Transfer Android App using TensorFlow Lite (CycleGAN)
-
-##  О проекте
+##  Обзор проекта
 
 PrismaAI — это мобильное приложение для переноса стиля изображения с помощью нейросети, работающей полностью на устройстве.
 
-Модель основана на CycleGAN и конвертирована в TensorFlow Lite для Android.
+Модель основана на CycleGAN и конвертирована в TensorFlow Lite для Android..
+
+Проект демонстрирует полный production pipeline:
+
+**Данные → Обучение CycleGAN → Экспорт модели → TensorFlow Lite → Развертывание на Android**
 
 ---
 
-##  Возможности
+##  Основная идея
 
--  Перенос стиля изображения
--  Работа на Android
--  Быстрый on-device inference
--  Полностью offline (без интернета)
+Модель обучается задаче непарного преобразования изображений:
 
-##  AI Pipeline
+- Домен A → Домен B (перенос стиля)
+- Домен B → Домен A (обратное преобразование)
 
-Image → Preprocess → TFLite Model (G_A2B) → Output Image → UI
+Используемая архитектура: **CycleGAN (Generative Adversarial Network)**
 
----
+## 🏗️ Архитектура системы
 
-##  Модель
-
-- Формат: TensorFlow Lite (.tflite)
-- Архитектура: CycleGAN (Generator G_A2B)
-- Вход: 256x256x3
-- Выход: 256x256x3
-
-##  Статус
-
-✔ Training completed  
-✔ Model exported to TFLite  
-✔ Inference tested  
-✔ Android integration ready  
+Входное изображение
+↓
+Генератор (A → B)
+↓
+Дискриминатор (B)
+↓
+Cycle Consistency Loss
+↓
+Обученный генератор
+↓
+Экспорт TensorFlow Lite (.tflite)
+↓
+Инференс в Android-приложении
 
 
-##  Запуск
+**Структура CycleGAN:**
 
-1. Скачать APK из Releases
-2. Установить на Android устройство
-3. Запустить приложение
+A ⇄ G\_A2B ⇄ B
+B ⇄ G\_B2A ⇄ A
 
-## Технологии
+D\_A (дискриминатор домена A)
+D\_B (дискриминатор домена B)
 
-- Kotlin
-- Jetpack Compose
+** Google Colab (Обучение)**
+
+Полный пайплайн обучения доступен в Google Colab:
+-  https://colab.research.google.com/drive/10aXKQMpzshjdKHQj1b-rVhrTzf_vNJCQ?usp=sharing
+
+Резервная ссылка:
+-  https://colab.research.google.com/drive/1dxRwdpggIU__WfS6tMR4G1OnKylrg5it
+
+-> Этот ноутбук включает:
+- Полное обучение CycleGAN
+- Визуализацию loss-функций
+- Оценку модели
+- Экспорт в TensorFlow
+  
+->  Развертывание TensorFlow Lite
+
+Обученная модель генератора конвертируется в формат .tflite для мобильного инференса.
+
+-> Использование:
+- Оптимизация под Android-устройства
+- Легковесный инференс
+- Перенос стиля в реальном времени
+  
+->  Android-приложение
+
+Android-приложение:
+
+- Загружает модель .tflite из assets
+- Обрабатывает входные изображения
+- Выполняет инференс локально (офлайн)
+- Выдает стилизованное изображение в реальном времени
+
+Основные функции:
+- Офлайн AI обработка
+- Быстрый инференс на мобильном устройстве
+- Легкое развертывание
+- Простой интерфейс для загрузки изображений
+- 
+  ## Структура репозитория
+
+PrismaAI/
+├── app/                  # Исходный код Android
+├── model/               # Файлы модели TFLite
+├── notebooks/           # Очищенные ноутбуки обучения
+├── assets/              # Примеры изображений
+├── README.md
+└── APK/                 # Сборки приложения
+
+## Используемые технологии
+- TensorFlow / Keras
+- CycleGAN (GAN архитектура)
 - TensorFlow Lite
-- MVVM
+- Android Studio (Kotlin)
+- OpenCV (предобработка изображений)
+  
+  **APK для загрузки**
 
----
+Скомпилированное Android-приложение доступно для тестирования:
+
+(https://github.com/Jul-Summer/PrismaAI/releases/tag/v1.0.1-bugfix-build)
+
+### Результаты
+
+Модель успешно выполняет:
+
+- Перенос стиля изображений
+- Адаптацию доменов без парных данных
+Инференс в реальном времени на мобильных устройствах
+
+## **Примечания**
+- Полное обучение выполняется в Google Colab (не в GitHub)
+- Версия GitHub содержит очищенный ноутбук (без outputs)
+- Это сделано для улучшения читаемости и предотвращения проблем рендеринга
+- 
+**Цель проекта**
+
+Продемонстрировать полный ML → Mobile production pipeline:
+
+Исследование → Обучение → Оптимизация → Мобильное развертывание
+
 
 ##  Автор
 Guljan Samarbekova
